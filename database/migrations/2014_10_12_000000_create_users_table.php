@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('login');
             $table->string('password');
-            $table->string('mode');// 'admin', 'operator'
+            $table->string('mode');// 'admin', 'user'
         });
     }
     public function down(): void

@@ -8,5 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Entity extends Model
 {
     use HasFactory;
+    protected $fillable = ['country', 'city', 'population', 'owner'];
     public $timestamps = false;
 }
