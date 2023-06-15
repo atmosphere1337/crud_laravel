@@ -11,7 +11,11 @@ class customController extends Controller
     public function page_get()
     {
         if (Auth::check())
-            return view('page'); 
+        {
+            $records = Entity::all(); 
+            return view('page', compact('records')); 
+        }
+
     }
     public function register_process(Request $request)
     {
@@ -33,7 +37,38 @@ class customController extends Controller
             return redirect()->route('page_get');
         }
         return back();
-
+    }
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        return redirect()->route('login_get');
+    }
+    public function add_record(Request $request)
+    {
+        $validated = $request->validate([
+            'country' => 'required',
+            'city' => 'required',
+            'population' => 'required',
+        ]);
+        Entity::add_rec($validated);
+        return redirect()->route('page_get');
+    }
+    public function page_update(Request $request)
+    {
+        $validated = $request->validate([
+            'id' => 'required',
+            'country' => 'required',
+            'city' => 'required',
+            'population' => 'required',
+        ]);
+        Entity::update_rec($validated);
+        return redirect()->route('page_get');
+    }
+    public function page_drop(Request $request)
+    {
+        $validated = $request->validate(['id' => 'required']);
+        Entity::drop_rec($validated);
+        return redirect()->route('page_get');
     }
     
 }
