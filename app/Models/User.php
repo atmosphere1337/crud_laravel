@@ -12,14 +12,20 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    protected $fillable   = ['login', 'password', 'mode',];
+    protected $fillable   = ['login', 'password', 'mode', 'ban'];
     protected $hidden     = [ 'password' ];
     public    $timestamps = false;
     protected $casts      = [ 'password' => 'hashed' ];
     public static function register($input)
     {
         $input['mode'] = 'user';
+        $input['ban'] = false;
         $user = new User($input);
         $user->save();
     }
+    public static $rules = 
+    [
+        'login' => 'required',
+        'password' => 'required',
+    ];
 }

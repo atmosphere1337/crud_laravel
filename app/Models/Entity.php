@@ -20,7 +20,14 @@ class Entity extends Model
     }
     public static function update_rec($input)
     {
-        $model = Entity::where('id', $input['id'])->where('owner', Auth::user()->id)->first();
+        if (Auth::user()->mode == 'admin') // admin handle
+        {
+            $model = Entity::where('id', $input['id'])->first();
+        }
+        else
+        {
+            $model = Entity::where('id', $input['id'])->where('owner', Auth::user()->id)->first();
+        }
         if ($model)
         {
             $model->country = $input['country'];
@@ -31,7 +38,14 @@ class Entity extends Model
     }
     public static function drop_rec($input)
     {
-        $model = Entity::where('id', $input['id'])->where('owner', Auth::user()->id)->first();
+        if (Auth::user()->mode == 'admin') // admin handle
+        {
+            $model = Entity::where('id', $input['id'])->first();
+        }
+        else
+        {
+            $model = Entity::where('id', $input['id'])->where('owner', Auth::user()->id)->first();
+        }
         if ($model)
         {
             $model->delete();

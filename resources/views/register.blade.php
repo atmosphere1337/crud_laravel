@@ -4,4 +4,5 @@
     <input type="text" name = "password" /><br/>
     <input type="submit"/><br/>
 </form>
+@include('other.validation_error')
 <a href="{{route('login_get')}}">Login</a>

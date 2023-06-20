@@ -14,9 +14,9 @@ class DatabaseSeeder extends Seeder
         DB::table('users')->delete();
         DB::table('entities')->delete();
         $users = [
-            ['id' => 1, 'login' => 'testuser', 'password'=>bcrypt('userpassword'), 'mode' => 'user'],
-            ['id' => 2, 'login' => 'testadmin', 'password'=>bcrypt('adminpassword'), 'mode' => 'admin'],
-            ['id' => 3, 'login' => 'testtesttest', 'password'=>bcrypt('testtesttest'), 'mode' => 'user'],
+            ['id' => 1, 'login' => 'testuser', 'password'=>bcrypt('userpassword'), 'mode' => 'user', 'ban' => false],
+            ['id' => 2, 'login' => 'testadmin', 'password'=>bcrypt('adminpassword'), 'mode' => 'admin', 'ban' => false],
+            ['id' => 3, 'login' => 'testtesttest', 'password'=>bcrypt('testtesttest'), 'mode' => 'user', 'ban' => false],
         ];
         $cities = [
             ['id' => 1, 'country' => 'Russia', 'city' => 'Moscow', 'population' => 12000000, 'owner' => 1],

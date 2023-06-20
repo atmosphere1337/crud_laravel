@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('login');
             $table->string('password');
             $table->string('mode');// 'admin', 'user'
+            $table->boolean('ban');
         });
     }
     public function down(): void
