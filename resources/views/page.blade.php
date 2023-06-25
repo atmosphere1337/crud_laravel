@@ -1,4 +1,3 @@
-<link rel="">
 <div>Page</div>
 <div style="display:table; border: 1px solid;">
     @foreach ($records as $record)
@@ -43,6 +42,9 @@
     {{method_field('Delete')}}
     <button type="submit">Logout</button>
 </form>
+<div>
+    <a href="/profile/{{auth()->user()->login}}">Profile</a>
+</div>
 @if (auth()->user()->mode == 'admin')
     <a href="{{ route('admin_get') }}">Admin</a>
 @endif

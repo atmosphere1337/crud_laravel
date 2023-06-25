@@ -16,12 +16,16 @@ class User extends Authenticatable
     protected $hidden     = [ 'password' ];
     public    $timestamps = false;
     protected $casts      = [ 'password' => 'hashed' ];
-    public static function register($input)
+    public static function register($input):bool
     {
+        $user = User::where('login', $input['login'])->first();
+        if ($user)
+            return False;
         $input['mode'] = 'user';
         $input['ban'] = false;
         $user = new User($input);
         $user->save();
+        return True;
     }
     public static $rules = 
     [

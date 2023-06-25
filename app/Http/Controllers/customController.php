@@ -21,8 +21,10 @@ class customController extends Controller
     {
         $validated = $request->validate(User::$rules);
         //------------------------------------------x3
-        User::register($validated);
-        return redirect()->route('login_get');//-------x4
+        if (User::register($validated))
+            return redirect()->route('login_get');//-------x4
+        else
+            return back()->withErrors(['acc_exists' => 'Account with this login already exists']);
     }
     public function login_process(Request $request)
     {
@@ -99,5 +101,22 @@ class customController extends Controller
         }
         else
             return back();
+    }
+    public function profile_get($usr)
+    {
+        if (Auth::user()->login == $usr)
+            return view('settings');
+        return redirect('/page');
+    }
+    public function change_password(Request $request, $usr)
+    {
+        if (Auth::user()->login == $usr)
+        {
+            User::whereId(auth()->user()->id)->update(['password' => $request->input['password'] ]);
+            //$model = User::find(Auth::id())->first();
+            //$model->password = $request->input['password'];
+            //$model->save();
+        }
+        return redirect('/page');
     }
 }

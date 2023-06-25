@@ -8,6 +8,7 @@ Route::get('/register', function(){ return view('register'); })->name('register_
 Route::get('/page', [customController::class, 'page_get'])->middleware(['auth', 'ban_mdlwr'])->name('page_get');
 Route::get('/admin', [customController::class, 'admin_get'])->middleware(['auth', 'admin_mdlwr'])->name('admin_get');
 Route::get('/ban', [customController::class, 'ban_notif'])->middleware('auth')->name('ban_notif');
+Route::get('/profile/{usr}',[customController::class, 'profile_get'])->middleware('auth');
 
 Route::post('/register/process', [customController::class, 'register_process'])->name('register_process');
 Route::post('/process', [customController::class, 'login_process'])->name('login_process');
@@ -19,3 +20,4 @@ Route::delete('/page/drop', [customController::class, 'page_drop'])->middleware(
 Route::put('/page/update', [customController::class, 'page_update'])->middleware('auth')->name('page_update');
 Route::put('/admin/ban', [customController::class, 'admin_ban'])->middleware(['auth', 'admin_mdlwr'])->name('admin_put');
 Route::put('/admin/unban', [customController::class, 'admin_unban'])->middleware(['auth', 'admin_mdlwr'])->name('admin_put_unban');
+Route::put('/profile/{usr}/process', [customController::class, 'change_password'])->middleware('auth');
