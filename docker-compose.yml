@@ -1,0 +1,22 @@
+services:
+  php:
+    container_name: php-apache
+    build:
+      dockerfile: ./docker/php/Dockerfile
+    volumes:
+      - ./docker/sites-available:/etc/apache2/sites-available
+      - ./docker/apache2.conf:/etc/apache2/apache2.conf
+      - .:/var/www/html
+      - ./docker/.env:/var/www/html/.env
+    ports:
+      - 80:80
+  mysql:
+    container_name: mysql
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 1337
+    volumes:
+      - ./docker/mysql:/docker-entrypoint-initdb.d
+    ports:
+      - 3306:3306
